@@ -74,6 +74,9 @@ public class User {
 	private String phoneNum; // phone number
 	private String resume; // this may be incorrect
 	private String name;
+	
+
+	
 
 	// Constructor
 	public User() {
@@ -84,6 +87,8 @@ public class User {
 		this.email = email;
 		this.phoneNum = phoneNum;
 	}
+	
+	
 
 	public static void main(String[] args) {
 
@@ -94,6 +99,8 @@ public class User {
 
 		//u.writeResume();
 		du.writeResume();
+		//du.createFolder();
+		
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,9 +116,27 @@ public class User {
 	public static void editInfo() {
 		// I want this to allow users to edit their own info
 	}
+	
+	public void createFolder() {
+		
+		File file;
+		String slash = "\\\\";
+		String directory = "C:\\\\Users\\\\Owner\\\\Documents\\\\eh.File folder";
+		file = new File(directory);
+		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))){
+		}catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
 
-	//incomplete
+
+	
 	public void writeResume() {
+		//incomplete
+		//			file.mkdirs();  <- this will create a new folder
+		//			\t in a string is like using tab (inserts space
+		//			ex: "\texample" <-> "	example"
 		String f;
 		String d;
 		String fileName;
@@ -119,6 +144,10 @@ public class User {
 		File file;
 		String fileChoice;
 		String slash = "\\\\";
+		String txt = ".txt";
+		String md = ".md";
+
+
 
 		// do this while f is null or empty
 		do {
@@ -137,10 +166,8 @@ public class User {
 			// this if else statement concatenates .txt to the end of fileName if user chooses t
 			// or .md if the user chooses m
 			if (fileChoice.equalsIgnoreCase("t")) {
-				String txt = ".txt";
 				fileName = slash.concat(name.trim()).concat(txt);
 			}else {
-				String md = ".md";
 				fileName = slash.concat(name.trim().concat(md));
 			}
 		}while( (!fileChoice.equalsIgnoreCase("m") && !fileChoice.equalsIgnoreCase("t")) );
@@ -186,6 +213,7 @@ public class User {
 
 			}catch (IOException ex) { 
 				ex.printStackTrace();}
+			
 		}
 
 
