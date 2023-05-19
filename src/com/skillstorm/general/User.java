@@ -70,10 +70,10 @@ public class User {
 	static Scanner in = new Scanner(System.in);
 
 	private String id;
+	private String name;
 	private String email;
 	private String phoneNum; // phone number
 	private String resume; // this may be incorrect
-	private String name;
 	
 
 	
@@ -82,8 +82,10 @@ public class User {
 	public User() {
 
 	}
-	public User(String id, String email, String phoneNum) {
+	public User(String id, String name, String email, String phoneNum) {
+		
 		this.id = id;
+		this.name = name;
 		this.email = email;
 		this.phoneNum = phoneNum;
 	}
@@ -92,7 +94,7 @@ public class User {
 
 	public static void main(String[] args) {
 
-		User u = new User("123", "123@gmail", "956-444-4444");
+		User u = new User("123", "Don Pickle",  "123@gmail", "956-444-4444");
 		User du = new User();
 
 		//System.out.println(u.toString());
@@ -240,6 +242,14 @@ public class User {
 
 	public String getPhoneNum() {
 		return this.phoneNum;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 }//class
