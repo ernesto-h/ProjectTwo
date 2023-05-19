@@ -148,19 +148,8 @@ public class User {
 		String md = ".md";
 
 
-
-		// do this while f is null or empty
 		do {
-			System.out.println("Welcome, User " + id + ". Let's build your resume!");
-			System.out.println("To begin, enter your name:");
-			// adding \ to the beginning of the file name so it can be concatenated to d(below)
-			// adding 
-			// ex: if file name is resume --> \\resume.txt
-			name = in.nextLine();
-		} while ((name == null || name.isEmpty() || name.equals(" "))); 
-
-
-		do {
+			System.out.println("Hi, " + name + ". Let's build your resume!");
 			System.out.println("Enter t to create a .txt file, or m to create a .md file.");
 			fileChoice = in.nextLine();
 			// this if else statement concatenates .txt to the end of fileName if user chooses t
