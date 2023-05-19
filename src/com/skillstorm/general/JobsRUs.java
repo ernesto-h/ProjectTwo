@@ -7,10 +7,9 @@ public class JobsRUs {
 	static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		User u = new User();
 
 		runApplication();
-	}
+	}// main method
 
 	public static void runApplication() {
 		int choice1;
@@ -42,38 +41,49 @@ public class JobsRUs {
 					choice2 = in.nextInt();
 
 					if(choice2 == 1) {
+						// needs work
 						// Search job listings
 					}
 					
 					if(choice2 == 2) {
-
+						// needs work
+						// Edit current resume
 					} 
 					
 					if(choice2 == 3) {
+						// needs work
+						// Create new resume
 						
 					}
 					
 					if(choice2 == 4) {
+						// needs work
+						// Edit account info
 						
 					}
 
 				}while(choice2 != 1 && choice2 != 2 && choice2 != 3 && choice2 != 4);
-			}
+			}// choice1 == 1
 
+			
 			if(choice1 == 2) {
+				// needs work
 				// this is for guest users
 				// guest users can search for jobs but cannot apply for jobs without being signed into an account
-			}
+			}// choice1 == 2
 
 
 
 			if(choice1 == 3) {
+				// needs work
+				// probably this method, but may need to change this
 				User.createAcct();
-			}
+			}// choice1 == 3
 
 		}while (choice1 != 1 && choice1 != 2 && choice1 != 3);
 
 
 
-	}
-}
+	}// runApplication()
+	
+}// class
