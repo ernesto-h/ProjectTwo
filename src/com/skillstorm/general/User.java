@@ -100,7 +100,6 @@ public class User {
 
 
 		du.writeResume();
-		//System.out.println(du.createFolder("C:\\\\Users\\\\Owner\\\\Documents"));
 
 	}
 
@@ -119,6 +118,7 @@ public class User {
 	}
 
 	public boolean createFolder(String s) {
+
 
 		String str = s;
 		File folder = new File(s.concat("\\\\").concat("Users"));
@@ -141,17 +141,37 @@ public class User {
 		String fileName;
 		String directory;
 		File file;
-		File folder = new File("Users");
 		String fileType;
 		String slash = "\\\\";
 		String txt = ".txt";
 		String md = ".md";
+
+		String resName;
+		String resEmail;
+		String resPhoneNum;
+		String resLocation;
+		String persStmnt;
+		String ynChoice;
+		String ynChoice2;
+		String langs;
+		String hardSkills;
+		String softSkills;
+		String jobTitle;
+		String coName;
+		String tPeriod;
+		String jobDescr;
+		String schoolName;
+		String degree;
+		String gradYr;
+
+
 
 
 
 		do { // do this until user inputs t or m when prompted
 			System.out.println("Hi, " + getName() + ". Let's build your resume!");
 			System.out.println();
+			System.out.println("For starters, lets create a file.");
 			System.out.println("Enter t to create a .txt file, or m to create a .md file.");
 			fileType = in.nextLine();
 
@@ -167,6 +187,8 @@ public class User {
 				System.out.println("File names cannot include the following characters:");
 				System.out.println("< : \" / \\ | ? *");
 				fileName = slash.concat(in.nextLine().trim());
+
+				System.out.println("Thanks!");
 			}while( 
 					fileName.contains("<") &&
 					fileName.contains(":")	&&
@@ -192,18 +214,22 @@ public class User {
 
 
 
+
 		do { // do this while d is null or empty, or while file isn't a directory
 			// needs work
 			System.out.println();
 			System.out.println("-----------------------------------------------------------------");
-			System.out.println("A new folder named Users will be created and will store your resume file.");
+			System.out.println("Now, lets put that resume somewhere easily accessible.");
+			System.out.println("We'll create a new folder for you named Users.");
+			System.out.println("You'll be able to find your resume in this folder.");
 			System.out.println();
+			System.out.println("Now we just need one more thing before we move on.");
 			System.out.println("Please enter the file directory to your Documents folder.");
-			System.out.println("Use two backslashes and follow the format in the example below.");
+			System.out.println("You can follow the format in the example below, and remember to use two backslashes.");
 			System.out.println("Ex: C:\\\\Users\\\\Owner\\\\Documents");
 			// copy this for your input: C:\\Users\\Owner\\Documents
 			d = in.nextLine();
-			
+
 			createFolder(d);
 
 			//directory = d.trim().concat(fileName);	
@@ -217,24 +243,192 @@ public class User {
 		// to enter info relevant to a resume
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))){
 
-			System.out.println("What's your name?");
-			name = in.nextLine();
-			bw.write(name.trim());
+			System.out.println("Whew, now that that's taken care of, lets start filling in your resume!");
+			System.out.println("We'll begin with some contact info.");
+			System.out.println("");
+			System.out.println("What's your full name?");
+			resName = in.nextLine();
+			bw.write(resName.trim());
 			bw.newLine();
 
 			System.out.println("What's your email?");
-			email = in.nextLine();
-			bw.write(email);
+			resEmail = in.nextLine();
+			bw.write(resEmail);
 			bw.newLine();
 
-			System.out.println("What's your phone number?");
-			System.out.println("Phone number must be in xxx-xxx-xxxx format.");
-			phoneNum = in.nextLine();
-			bw.write(phoneNum);
+			System.out.println("Phone number?");
+			System.out.println("We recommend using the xxx-xxx-xxxx format.");
+			resPhoneNum = in.nextLine();
+			bw.write(resPhoneNum);
 			bw.newLine();
 
-			//this block of code will be where I queue the user to input info
-			//that will go on their resume
+			System.out.println("What city and state do you live in?");
+			resLocation = in.nextLine();
+			bw.write(resLocation);
+			bw.newLine();
+
+			System.out.println("Great, now we'll add your personal statement.");
+			System.out.println("This should be a brief, engaging text about yourself.");
+			System.out.println("Try to add a short description of an important achievement and some key ");
+			System.out.println("information about your education, experience, and skills relative to the job");
+			System.out.println("you're applying for. Overall, the personal statement should be around 3 to 5 sentences long.");
+			System.out.println();
+			System.out.println("Enter your personal statement.");
+			persStmnt = in.nextLine();
+			bw.write(persStmnt);
+
+			System.out.println("Nice!");
+			System.out.println("Lets put some of your skills on display.");
+			System.out.println("Do you know any languages?");
+			do { // do this until user enters yes or no or y or n
+				System.out.println("Enter yes or no.");
+				ynChoice = in.nextLine();
+			}while (!(ynChoice.equalsIgnoreCase("yes") &&
+					!(ynChoice.equalsIgnoreCase("y") &&
+							!(ynChoice.equalsIgnoreCase("no") &&
+									!(ynChoice.equalsIgnoreCase("n")
+											)))));
+			if(ynChoice.equalsIgnoreCase("y") || ynChoice.equalsIgnoreCase("yes")) {
+				System.out.println("Impressive!");
+				System.out.println("Enter the languages you know separated by commas.");
+				langs = in.nextLine();
+				bw.write("Languages:");
+				bw.newLine();
+				bw.write(langs);
+				bw.newLine();
+			}else if (ynChoice.equalsIgnoreCase("n") || ynChoice.equalsIgnoreCase("no")) {
+				System.out.println("No worries! Lets move on to the next section.");
+			}
+			
+			System.out.println("Do you have any technical skills?");
+			do { // do this until user enters yes or no or y or n
+				System.out.println("Enter yes or no.");
+				ynChoice = in.nextLine();
+			}while (!(ynChoice.equalsIgnoreCase("yes") &&
+					!(ynChoice.equalsIgnoreCase("y") &&
+							!(ynChoice.equalsIgnoreCase("no") &&
+									!(ynChoice.equalsIgnoreCase("n")
+											)))));
+			if(ynChoice.equalsIgnoreCase("y") || ynChoice.equalsIgnoreCase("yes")) {
+				System.out.println("Enter your skills separated by commas.");
+				hardSkills = in.nextLine();
+				bw.write("Technical Skills:");
+				bw.newLine();
+				bw.write(hardSkills);
+				bw.newLine();
+				System.out.println("Very nice!");
+			}else if (ynChoice.equalsIgnoreCase("n") || ynChoice.equalsIgnoreCase("no")) {
+				System.out.println("No worries! Lets move on to the next section.");
+			}
+			
+			System.out.println("Everyone has some soft skills, so take some time to add some of yours!");
+			System.out.println("Soft skills are skills like \"Leadership\" or \"Adaptable\".");
+			System.out.println("Enter a few soft skills separated by commas.");
+			softSkills = in.nextLine();
+			bw.write("Soft Skills:");
+			bw.newLine();
+			bw.write(softSkills);
+			bw.newLine();
+			System.out.println("Well done!");
+			
+			System.out.println("Alright, we're almost done! Lets get down to the meat and potatoes of your resume.");
+			System.out.println("These are your Education and Work histories.");
+			System.out.println("Lets knock out your Work History first.");
+			System.out.println("Do you have any previous or current employment history you'd like to add?");
+			System.out.println("Remember to keep it relative to the job you're applying for.");
+			System.out.println();
+			do { // do this until user enters yes or no or y or n
+				System.out.println("Enter yes or no.");
+				ynChoice = in.nextLine();
+			}while (!(ynChoice.equalsIgnoreCase("yes") &&
+					!(ynChoice.equalsIgnoreCase("y") &&
+							!(ynChoice.equalsIgnoreCase("no") &&
+									!(ynChoice.equalsIgnoreCase("n")
+											)))));
+			if(ynChoice.equalsIgnoreCase("y") || ynChoice.equalsIgnoreCase("yes")) {
+				
+				do {
+				System.out.println("Enter the job title.");
+				jobTitle = in.nextLine();
+				bw.write("Job History:");
+				bw.newLine();
+				bw.write(jobTitle);
+				bw.newLine();
+				System.out.println("Enter the name of the company that employed you.");
+				coName = in.nextLine();
+				bw.write(coName);
+				bw.newLine();
+				System.out.println("Enter the time period you were employed.");
+				System.out.println("We recommend the following format: mm/yyyy - mm/yyyy");
+				tPeriod = in.nextLine();
+				bw.write(tPeriod);
+				bw.newLine();
+				System.out.println("Write one to three sentences describing your roles and responsibilities.");
+				jobDescr = in.nextLine();
+				bw.write(jobDescr);
+				bw.newLine();
+				System.out.println("Very nice!");
+				System.out.println("Would you like to enter another job?");
+				ynChoice2 = in.nextLine();
+				}while(ynChoice2.equalsIgnoreCase("y") || ynChoice2.equalsIgnoreCase("yes"));
+				
+				if (ynChoice2.equalsIgnoreCase("n") || ynChoice2.equalsIgnoreCase("no")) {
+					System.out.println("No worries! Lets move on to the next section.");
+				}
+				
+			}else if (ynChoice.equalsIgnoreCase("n") || ynChoice.equalsIgnoreCase("no")) {
+				System.out.println("No worries! Lets move on to the next section.");
+			}
+			
+			
+			
+			
+			System.out.println("Time to add your Education History!");
+			System.out.println("Do you have any previous or current education history you'd like to add?");
+			System.out.println();
+			do { // do this until user enters yes or no or y or n
+				System.out.println("Enter yes or no.");
+				ynChoice = in.nextLine();
+			}while (!(ynChoice.equalsIgnoreCase("yes") &&
+					!(ynChoice.equalsIgnoreCase("y") &&
+							!(ynChoice.equalsIgnoreCase("no") &&
+									!(ynChoice.equalsIgnoreCase("n")
+											)))));
+			if(ynChoice.equalsIgnoreCase("y") || ynChoice.equalsIgnoreCase("yes")) {
+				
+				do {
+				System.out.println("Enter the school's name.");
+				schoolName = in.nextLine();
+				bw.write("Education History:");
+				bw.newLine();
+				bw.write(schoolName);
+				bw.newLine();
+				System.out.println("Enter degree earned or total credit hours earned if incomplete.");
+				degree = in.nextLine();
+				bw.write(degree);
+				bw.newLine();
+				System.out.println("Enter your gradation year.");
+				gradYr = "Graduation date: ";
+				gradYr += in.nextLine();
+				bw.write(gradYr);
+				bw.newLine();
+				System.out.println();
+				System.out.println("Very nice!");
+				System.out.println("Would you like to enter another educational institution?");
+				ynChoice2 = in.nextLine();
+				}while(ynChoice2.equalsIgnoreCase("y") || ynChoice2.equalsIgnoreCase("yes"));
+				
+				if (ynChoice2.equalsIgnoreCase("n") || ynChoice2.equalsIgnoreCase("no")) {
+					System.out.println("No worries!");
+				}
+				
+			}else if (ynChoice.equalsIgnoreCase("n") || ynChoice.equalsIgnoreCase("no")) {
+				System.out.println("No worries!");
+			}
+			
+			System.out.println("Congratulations, " + getName() + ", you've succesfully created your resume.");
+			System.out.println("You'll be working at your dream job in no time!");
+			
 
 		}catch (IOException ex) { 
 			ex.printStackTrace();}
