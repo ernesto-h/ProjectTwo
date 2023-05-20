@@ -74,66 +74,63 @@ public class User {
 	private String email;
 	private String phoneNum; // phone number
 	private String resume; // this may be incorrect
-	
 
-	
+
+
 
 	// Constructor
 	public User() {
 
 	}
 	public User(String id, String name, String email, String phoneNum) {
-		
+
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phoneNum = phoneNum;
 	}
-	
-	
+
+
 
 	public static void main(String[] args) {
 
 		User u = new User("123", "Don Pickle",  "123@gmail", "956-444-4444");
 		User du = new User();
 
-		//System.out.println(u.toString());
 
-		//u.writeResume();
+
 		du.writeResume();
-		//du.createFolder();
-		
+		//System.out.println(du.createFolder("C:\\\\Users\\\\Owner\\\\Documents"));
+
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////METHODS//////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	//empty
+	// needs work
 	public static void createAcct() {
 		// I want this to allow users to make a new account
 	}
 
-	//empty
+	// needs work
 	public static void editInfo() {
 		// I want this to allow users to edit their own info
 	}
-	
-	public void createFolder() {
-		
-		File file;
-		String slash = "\\\\";
-		String directory = "C:\\\\Users\\\\Owner\\\\Documents\\\\eh.File folder";
-		file = new File(directory);
-		
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))){
-		}catch (IOException ex) {
-			ex.printStackTrace();
+
+	public boolean createFolder(String s) {
+
+		String str = s;
+		File folder = new File(s.concat("\\\\").concat("Users"));
+		if(folder.mkdir() == false) {
+			return false;
+		}else {
+			return true;
 		}
 	}
 
 
-	
+
 	public void writeResume() {
 		//incomplete
 		//			file.mkdirs();  <- this will create a new folder
@@ -144,68 +141,105 @@ public class User {
 		String fileName;
 		String directory;
 		File file;
-		String fileChoice;
+		File folder = new File("Users");
+		String fileType;
 		String slash = "\\\\";
 		String txt = ".txt";
 		String md = ".md";
 
 
-		do {
-			System.out.println("Hi, " + name + ". Let's build your resume!");
+
+		do { // do this until user inputs t or m when prompted
+			System.out.println("Hi, " + getName() + ". Let's build your resume!");
+			System.out.println();
 			System.out.println("Enter t to create a .txt file, or m to create a .md file.");
-			fileChoice = in.nextLine();
+			fileType = in.nextLine();
+
+			do { 
+				// needs work
+				// can keep this option to name the file, or delete this
+				// loop and set the file name to getName()
+
+				// do this until user inputs a valid file name
+				System.out.println();
+				System.out.println("-----------------------------------------------------------------");
+				System.out.println("Enter a name for your file.");
+				System.out.println("File names cannot include the following characters:");
+				System.out.println("< : \" / \\ | ? *");
+				fileName = slash.concat(in.nextLine().trim());
+			}while( 
+					fileName.contains("<") &&
+					fileName.contains(":")	&&
+					fileName.contains("\"") &&
+					fileName.contains("/") &&
+					fileName.contains("\\") &&
+					fileName.contains("|") &&
+					fileName.contains("?") &&
+					fileName.contains("*")
+					);
+
+
 			// this if else statement concatenates .txt to the end of fileName if user chooses t
 			// or .md if the user chooses m
-			if (fileChoice.equalsIgnoreCase("t")) {
-				fileName = slash.concat(name.trim()).concat(txt);
+			if (fileType.equalsIgnoreCase("t")) {
+				fileName += txt;
+				//fileName = slash.concat(getName().trim()).concat(txt);
 			}else {
-				fileName = slash.concat(name.trim().concat(md));
+				fileName += md;
+				//fileName = slash.concat(getName().trim().concat(md));
 			}
-		}while( (!fileChoice.equalsIgnoreCase("m") && !fileChoice.equalsIgnoreCase("t")) );
+		}while( (!fileType.equalsIgnoreCase("m") && !fileType.equalsIgnoreCase("t")) );
 
 
 
-			// do this while d is null or empty, or while file isn't a directory
-			// need to add a try-catch block here for FileNotFoundException
-			do {
-				System.out.println("Where would you like to save your resume?");
-				System.out.println("Enter a file directory where you would like to save your resume.");
-				System.out.println("Please use two backslashes and follow the format in the example below.");
-				System.out.println("Ex: C:\\\\Users\\\\Owner\\\\Documents");
-				d = in.nextLine();
-
-				directory = d.trim().concat(fileName);			
-				file = new File(directory);
-			}while((d == null || d.isEmpty() || file.isDirectory() ));
-		
-
-			// this try-catch block will contain the code that will queue the user
-			// to enter info relevant to a resume
-			try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))){
-
-				System.out.println("What's your name?");
-				name = in.nextLine();
-				bw.write(name.trim());
-				bw.newLine();
-
-				System.out.println("What's your email?");
-				email = in.nextLine();
-				bw.write(email);
-				bw.newLine();
-
-				System.out.println("What's your phone number?");
-				System.out.println("Phone number must be in xxx-xxx-xxxx format.");
-				phoneNum = in.nextLine();
-				bw.write(phoneNum);
-				bw.newLine();
-
-				//this block of code will be where I queue the user to input info
-				//that will go on their resume
-
-			}catch (IOException ex) { 
-				ex.printStackTrace();}
+		do { // do this while d is null or empty, or while file isn't a directory
+			// needs work
+			System.out.println();
+			System.out.println("-----------------------------------------------------------------");
+			System.out.println("A new folder named Users will be created and will store your resume file.");
+			System.out.println();
+			System.out.println("Please enter the file directory to your Documents folder.");
+			System.out.println("Use two backslashes and follow the format in the example below.");
+			System.out.println("Ex: C:\\\\Users\\\\Owner\\\\Documents");
+			// copy this for your input: C:\\Users\\Owner\\Documents
+			d = in.nextLine();
 			
-		}
+			createFolder(d);
+
+			//directory = d.trim().concat(fileName);	
+			directory = d.trim().concat(slash).concat("Users").concat(fileName);	
+			file = new File(directory);
+
+		}while((d == null || d.isEmpty() || file.isDirectory() ));
+
+
+		// this try-catch block will contain the code that will queue the user
+		// to enter info relevant to a resume
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))){
+
+			System.out.println("What's your name?");
+			name = in.nextLine();
+			bw.write(name.trim());
+			bw.newLine();
+
+			System.out.println("What's your email?");
+			email = in.nextLine();
+			bw.write(email);
+			bw.newLine();
+
+			System.out.println("What's your phone number?");
+			System.out.println("Phone number must be in xxx-xxx-xxxx format.");
+			phoneNum = in.nextLine();
+			bw.write(phoneNum);
+			bw.newLine();
+
+			//this block of code will be where I queue the user to input info
+			//that will go on their resume
+
+		}catch (IOException ex) { 
+			ex.printStackTrace();}
+
+	}
 
 
 	@Override
@@ -243,11 +277,11 @@ public class User {
 	public String getPhoneNum() {
 		return this.phoneNum;
 	}
-	
+
 	public String getName() {
 		return this.name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
